@@ -23,7 +23,7 @@ then
 fi
 
 # Download all the extra packages at once
-yay -Sy vim i3-wm feh neovim alacritty unzip neofetch i3blocks i3lock i3status polybar picom rofi pfetch  
+yay -Sy vim i3-wm feh neovim alacritty unzip neofetch i3blocks i3lock i3status polybar picom rofi pfetch
 # set startx
 echo "exec i3" > .xinitrc
 echo "exec picom" >> .xinitrc
@@ -88,6 +88,15 @@ fi
 #echo "Open neovim to set up AstroNvim."
 
 #echo "Not setting up AstroNvim, for now."
+
+# Setup ly
+read -r -p "Install and load ly greeter via systemd? [Y/n]" response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    yay -Sy ly
+    systemctl enable ly.service
+    systemctl disable getty@tty2.service
+fi
 
 echo "NvChad will install on the first run of Neovim. Delete ~/.config/nvim to opt out."
 
